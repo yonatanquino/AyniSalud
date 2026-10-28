@@ -1,0 +1,42 @@
+AYNISALUD - GUÍA RÁPIDA PARA WINDOWS + VS CODE + MYSQL WORKBENCH
+=================================================================
+
+INSTALAR (una sola vez):
+1) Node.js LTS (Node 22 recomendado) => https://nodejs.org/
+2) MySQL Community Server 8.0+ + MySQL Workbench => https://dev.mysql.com/downloads/installer/
+3) Visual Studio Code => https://code.visualstudio.com/
+
+PRIMER ARRANQUE:
+1) Extraer este ZIP; abrir la carpeta AyniSalud en VS Code.
+2) MySQL Workbench: conectar a MySQL, abrir db/01_esquema.sql, ejecutar TODO (⚡).
+3) Terminal 1 en VS Code:
+   cd backend
+   Copy-Item .env.example .env
+   npm install
+4) Editar backend/.env: DB_PASSWORD = contraseña de MySQL; JWT_SECRET = clave aleatoria segura.
+   Para generar JWT_SECRET:
+   node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+5) Con la terminal todavía en backend:
+   npm run seed
+   npm run dev
+6) Segunda terminal en VS Code (desde la carpeta principal AyniSalud):
+   cd frontend
+   npm install
+   npm run dev
+7) Navegador: http://127.0.0.1:5173
+
+USUARIO DEMO:
+   admin@aynisalud.local
+   Contraseña: la que está en DEMO_PASSWORD de backend/.env (ejemplo Cambiar123!)
+
+PARA ARRANCAR LOS SIGUIENTES DÍAS:
+   Una vez instalado, haz doble clic en INICIAR_WINDOWS.bat
+   Requiere el servicio MySQL activo.
+
+PARA EJECUTAR PRUEBAS:
+   Terminal dentro de backend -> npm test
+   Con API y MySQL activos -> npm run smoke
+
+SI HAY PROBLEMAS: lee README.md; sección "Problemas comunes".
+
+NOTA: demostración académica con residentes y medicación FICTICIOS.

@@ -1,0 +1,94 @@
+// Modelo AyniSalud (original de tu compañero, más bitácora RF07)
+Table roles {
+  id_rol integer [primary key, increment]
+  nombre_rol varchar(50) [not null, unique]
+}
+Table usuarios {
+  id_usuario integer [primary key, increment]
+  id_rol integer [not null]
+  nombre_completo varchar(150) [not null]
+  correo varchar(100) [not null, unique]
+  contrasena_hash varchar(255) [not null]
+  telefono varchar(20)
+  estado boolean
+}
+Table residentes {
+  id_residente integer [primary key, increment]
+  id_familiar_tutor integer
+  nombres varchar(100) [not null]
+  apellidos varchar(100) [not null]
+  fecha_nacimiento date [not null]
+  numero_habitacion varchar(20) [not null]
+  alergias text
+  condiciones_medicas text
+  fecha_ingreso date [not null]
+  estado boolean
+}
+Table farmacos {
+  id_farmaco integer [primary key, increment]
+  nombre_comercial varchar(150) [not null]
+  principio_activo varchar(150) [not null]
+  presentacion varchar(50) [not null]
+  stock_disponible integer
+}
+Table esquemas_medicacion {
+  id_esquema integer [primary key, increment]
+  id_residente integer [not null]
+  id_farmaco integer [not null]
+  dosis varchar(50) [not null]
+  via_administracion varchar(50) [not null]
+  frecuencia_horas integer [not null]
+  hora_inicio time [not null]
+  fecha_inicio date [not null]
+  fecha_fin date [not null]
+}
+Table registros_medicacion {
+  id_registro_med integer [primary key, increment]
+  id_esquema integer [not null]
+  id_enfermero integer [not null]
+  fecha_programada datetime [not null]
+  fecha_administrada datetime
+  estado_alerta varchar(50)
+  observaciones text
+  indexes {(id_esquema, fecha_programada) [unique]}
+}
+Table registros_alimentacion {
+  id_registro_ali integer [primary key, increment]
+  id_residente integer [not null]
+  id_cuidador integer [not null]
+  tipo_comida varchar(50) [not null]
+  tipo_dieta varchar(100) [not null]
+  fecha_hora_programada datetime [not null]
+  fecha_hora_entregada datetime
+  estado varchar(50)
+}
+Table signos_vitales {
+  id_signo integer [primary key, increment]
+  id_residente integer [not null]
+  id_enfermero integer [not null]
+  presion_arterial varchar(20) [not null]
+  frecuencia_cardiaca integer [not null]
+  saturacion_oxigeno integer [not null]
+  glucemia integer [not null]
+  fecha_registro datetime [not null]
+}
+Table bitacoras_guardia {
+  id_bitacora integer [primary key, increment]
+  id_usuario integer [not null]
+  id_residente integer
+  turno varchar(20) [not null]
+  nota text [not null]
+  fecha_registro datetime [not null]
+}
+Ref: usuarios.id_rol > roles.id_rol
+Ref: residentes.id_familiar_tutor > usuarios.id_usuario
+Ref: esquemas_medicacion.id_residente > residentes.id_residente
+Ref: esquemas_medicacion.id_farmaco > farmacos.id_farmaco
+Ref: registros_medicacion.id_esquema > esquemas_medicacion.id_esquema
+Ref: registros_medicacion.id_enfermero > usuarios.id_usuario
+Ref: registros_alimentacion.id_residente > residentes.id_residente
+Ref: registros_alimentacion.id_cuidador > usuarios.id_usuario
+Ref: signos_vitales.id_residente > residentes.id_residente
+Ref: signos_vitales.id_enfermero > usuarios.id_usuario
+Ref: bitacoras_guardia.id_usuario > usuarios.id_usuario
+Ref: bitacoras_guardia.id_residente > residentes.id_residente
