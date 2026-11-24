@@ -1,7 +1,6 @@
 # AyniSalud — sistema web de acompañamiento
 
-**Proyecto académico funcional (MVP)**, basado en *Sistema Web de Acompañamiento Digital y Gestión de Rutinas de Salud y Alimentación para la Mejora de la Atención en Centros de Acogida de Larga Estancia del Departamento de La Paz* (Universidad Salesiana de Bolivia, 2026), y el diagrama ER compartido para **AyniSalud**.
-
+**Proyecto académico funcional (MVP)**, basado en *Sistema Web de Acompañamiento Digital y Gestión de Rutinas de Salud y Alimentación para la Mejora de la Atención en Centros de Acogida de Larga Estancia del Departamento de La Paz* (Universidad Salesiana de Bolivia, 2026)
 
 ## Tecnologías elegidas
 
